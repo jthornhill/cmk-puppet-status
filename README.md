@@ -16,15 +16,18 @@ There are three files:
 
 * perfometer_check_mk_puppet_status.py (optional) - a perfometer recipe for displaying the nifty in-line graph.
            This file typically goes in /usr/share/check_mk/web/plugins/perfometer/perfometer_check_mk_puppet_status.py
+LICENSE
+
+The lousy code in this repository is copyright 2012 by Jeremy Thornhill. It is placed in the public domain. So, knock yourself out!
 
 USAGE
 
-Put those files where they belong.
+First, put those files where they belong.
 
-Optionally, configure your thresholds (in seconds) in check_mk - the variable name is "puppet_run_stats".
+Next, (optionally) configure your thresholds (in seconds) in check_mk - the variable name is "puppet_run_stats".
 The default thresholds are 35 minutes (warning) and 65 minutes (crit).
 
-When things are in place, run check_mk --checks=puppet.status -I; check_mk -R; service httpd restart
+Finally, when things are in place, run check_mk --checks=puppet.status -I; check_mk -R; service httpd restart
 
 NOTES
 
@@ -34,7 +37,10 @@ be populated with the data this check requires (this is tested with clients as o
 
 Services will go critical if any failures were reported in the run and/or if the freshness threshold is exceeded.
 
-The perfometer will display different data depending on the run state:
+The perfometer will display different data depending on the run state. The issue is that perfometers are really bad at expressing
+composite checks like this which have multiple data sources, but I also don't really want to give each metric of the puppet run its
+own service check. I honestly don't totally love how this works, so please feel free to send me some feedback if you can think of a
+better way to represent the data in perfometer form:
 
 - no changes, no failures, within freshness threshold: green graph of run time as percentage of warn; text is minutes since last run
 - some changes, no failures, within freshness threshold: magenta graph of run time as percentage of warn; text is number of changed resources
@@ -43,3 +49,5 @@ The perfometer will display different data depending on the run state:
 
 If you are using pnp4nagios with check_mk (which you really should be doing) you'll get graphs of the data this plugin tracks (run time,
 run freshness, failed resources, changed resources).
+
+
