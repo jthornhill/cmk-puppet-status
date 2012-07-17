@@ -16,6 +16,7 @@ There are three files:
 
 * perfometer_check_mk_puppet_status.py (optional) - a perfometer recipe for displaying the nifty in-line graph.
            This file typically goes in /usr/share/check_mk/web/plugins/perfometer/perfometer_check_mk_puppet_status.py
+
 LICENSE
 
 The lousy code in this repository is copyright 2012 by Jeremy Thornhill. It is placed in the public domain. So, knock yourself out!
